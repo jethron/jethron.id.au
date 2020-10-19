@@ -32,6 +32,10 @@ server {
 	ssl_stapling_verify on;
 	resolver 108.61.10.10;
 
+	add_header Expect-CT "max-age=86400,enforce" always;
+	add_header Strict-Transport-Security "max-age=63072000; includeSubDomains" always;
+	add_header X-Content-Type-Options "nosniff" always;
+
 	root /home/jethron/jethron.id.au;
 	index index.html;
 	http2_push_preload on;
@@ -45,21 +49,22 @@ server {
 	}
 
 	location / {
-		# First attempt to serve request as file, then
-		# as directory, then fall back to displaying a 404.
 		try_files $uri $uri/ =404;
 	}
 
 	location ~* \.html {
 		http2_push /style.css;
 		http2_push /icons.svg;
-		add_header X-Clacks-Overhead "GNU Terry Pratchett" always;
-		add_header Strict-Transport-Security "max-age=63072000; includeSubDomains" always;
-		add_header X-Content-Type-Options "nosniff" always;
+
+		# these only make sense for pages (i think)
+		add_header Content-Security-Policy  "default-src 'self'; font-src 'none'; object-src 'none'; frame-src 'none'; img-src 'self' https://github.com https://*.githubusercontent.com; frame-ancestors 'none'; block-all-mixed-content; base-uri 'none'; form-action 'self';" always;
 		add_header X-Frame-Options "DENY" always;
 		add_header X-XSS-Protection "1; mode=block" always;
+
+		# adding new headers stops inheritance, so duplicate these ones
 		add_header Expect-CT  "max-age=86400,enforce" always;
-		add_header Content-Security-Policy  "default-src 'self'; font-src 'none'; object-src 'none'; frame-src 'none'; img-src 'self' https://github.com https://*.githubusercontent.com; frame-ancestors 'none'; block-all-mixed-content; base-uri 'none'; form-action 'self';" always;
+		add_header Strict-Transport-Security "max-age=63072000; includeSubDomains" always;
+		add_header X-Content-Type-Options "nosniff" always;
 	}
 
 	location /pkg/ {
