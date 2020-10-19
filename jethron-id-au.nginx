@@ -1,3 +1,21 @@
+server_tokens off; # removal entirely would be nice but not available in OSS nginx
+
+ssl_session_cache shared:tls:6m; # 6mb is low but not expecting high traffic
+ssl_ciphers TLSv1.2!kRSA; # mostly sane; mildly better choices than the defaults
+
+tcp_nodelay on;
+keepalive_timeout 65;
+
+# encoding settings
+charset utf-8;
+gzip_vary on;
+gzip_static on; # mostly only for static stuff compressed with zopfli
+gzip_comp_level 7;
+gzip_http_version 1.1;
+# variables would be nice for these, usually want them in sync
+gzip_types	text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript image/svg+xml;
+charset_types	text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript image/svg+xml;
+
 server {
 	listen [::]:80 default_server ipv6only=off;
 	listen [::]:443 default_server ssl http2 ipv6only=off;
