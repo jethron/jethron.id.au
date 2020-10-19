@@ -10,8 +10,8 @@ main, footer {
   max-width: 42rem;
 }
 
-a:link { color: #ee5622; }
-a:visited { color: #ee5622; }
+a:link { color: #f6753a; }
+a:visited { color: #f6753a; }
 a:hover { color: #eee; }
 a:active { color: #eca72c; }
 
@@ -57,4 +57,4 @@ nav a {
 }
 
 nav a:link, nav a:visited { color: #eee; }
-nav a:hover, nav a:active { color: #ee5622; }
+nav a:hover, nav a:active { color: #f6753a; }
