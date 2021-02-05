@@ -64,7 +64,7 @@ server {
 	}
 
 	location /pkg/ {
-		proxy_pass http://pkg.freebsd.org/;
+		proxy_pass http://pkg0.tuk.freebsd.org/;
 	}
 
 	location /aero {
