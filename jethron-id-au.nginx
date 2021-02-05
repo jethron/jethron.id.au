@@ -9,12 +9,12 @@ keepalive_timeout 65;
 # encoding settings
 charset utf-8;
 gzip_vary on;
-gzip_static on; # mostly only for static stuff compressed with zopfli
+gzip_static on; # for static stuff compressed with zopfli
 gzip_comp_level 7;
 gzip_http_version 1.1;
-# variables would be nice for these, usually want them in sync
-gzip_types	text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript image/svg+xml;
+# usually want these in sync; text/html is implicit
 charset_types	text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript image/svg+xml;
+gzip_types	text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript image/svg+xml;
 
 server {
 	listen [::]:80 default_server ipv6only=off;
