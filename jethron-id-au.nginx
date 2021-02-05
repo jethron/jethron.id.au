@@ -38,7 +38,6 @@ server {
 
 	root /home/jethron/jethron.id.au;
 	index index.html;
-	http2_push_preload on;
 
 	location /.git {
 		return 404;
@@ -53,9 +52,6 @@ server {
 	}
 
 	location ~* \.html {
-		http2_push /style.css;
-		http2_push /icons.svg;
-
 		# these only make sense for pages (i think)
 		add_header Content-Security-Policy  "default-src 'self'; font-src 'none'; object-src 'none'; frame-src 'none'; img-src 'self' https://github.com https://*.githubusercontent.com; frame-ancestors 'none'; block-all-mixed-content; base-uri 'none'; form-action 'self';" always;
 		add_header X-Frame-Options "DENY" always;
