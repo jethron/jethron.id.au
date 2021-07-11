@@ -3,6 +3,7 @@ server_tokens off; # removal entirely would be nice but not available in OSS ngi
 ssl_protocols TLSv1.2 TLSv1.3;
 ssl_prefer_server_ciphers on;
 ssl_ciphers TLSv1.2!kRSA; # mostly sane; mildly better choices than the defaults
+ssl_session_cache shared:tls:6m; # 6mb is low but not expecting high traffic
 
 sendfile on;
 tcp_nodelay on;
