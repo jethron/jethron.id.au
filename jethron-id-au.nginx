@@ -66,6 +66,19 @@ server {
 		add_header Access-Control-Allow-Origin "*" always;
 	}
 
+	location ^~ /sync/ {
+		auth_basic "Syncthing";
+		auth_basic_user_file /home/jethron/htaccess;
+
+		proxy_set_header Host localhost;
+		proxy_set_header X-Real-IP $remote_addr;
+		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+		proxy_set_header X-Forwarded-Proto $scheme;
+
+		proxy_pass http://localhost:8384/;
+		break;
+	}
+
 	location /dokuwiki/ {
 		root /usr/local/www;
 		try_files $uri $uri/ =404;
