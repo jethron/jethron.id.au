@@ -54,6 +54,10 @@ server {
 		return 404;
 	}
 
+	location ^~ /asciidoc/ {
+		alias /home/jethron/code/asciidoc/asciidoc-lang/public/;
+	}
+
 	location / {
 		try_files $uri $uri/ =404;
 	}
