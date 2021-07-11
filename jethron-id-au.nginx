@@ -62,6 +62,10 @@ server {
 		try_files $uri $uri/ =404;
 	}
 
+	location ^~ /.well-known/openpgpkey/hu/ {
+		add_header Access-Control-Allow-Origin "*" always;
+	}
+
 	location /dokuwiki/ {
 		root /usr/local/www;
 		try_files $uri $uri/ =404;
