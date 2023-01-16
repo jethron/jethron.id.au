@@ -44,7 +44,7 @@ server {
 	add_header X-Content-Type-Options "nosniff" always;
 
 	root /home/jethron/code/jethron.id.au;
-	index index.html doku.php index.php;
+	index index.html index.php;
 
 	location /.git {
 		return 404;
@@ -77,20 +77,6 @@ server {
 
 		proxy_pass http://localhost:8384/;
 		break;
-	}
-
-	location /dokuwiki/ {
-		root /usr/local/www;
-		try_files $uri $uri/ =404;
-
-		location ~ \.php$ {
-			try_files $uri =404;
-			include        fastcgi_params;
-			fastcgi_param  SCRIPT_FILENAME $request_filename;
-			fastcgi_pass   127.0.0.1:9000;
-		}
-
-		location ~ /(conf/|bin/|inc/|install.php) { deny all; }
 	}
 
 	location ~* \.html {
