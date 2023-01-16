@@ -97,7 +97,7 @@ server {
 	}
 
 	location /pkg/ {
-		proxy_pass http://pkg0.tuk.freebsd.org/;
+		proxy_pass http://pkg0.syd.freebsd.org/;
 	}
 
 	location /print/ {
