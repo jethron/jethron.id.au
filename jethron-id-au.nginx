@@ -1,8 +1,10 @@
 server_tokens off; # removal entirely would be nice but not available in OSS nginx
 
 ssl_protocols TLSv1.2 TLSv1.3;
-ssl_prefer_server_ciphers on;
-ssl_ciphers TLSv1.2!kRSA; # mostly sane; mildly better choices than the defaults
+ssl_prefer_server_ciphers off;
+ssl_ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384:DHE-RSA-CHACHA20-POLY1305;
+ssl_session_tickets off;
+ssl_session_timeout 1d;
 ssl_session_cache shared:tls:6m; # 6mb is low but not expecting high traffic
 
 sendfile on;
@@ -30,7 +32,9 @@ map $http_upgrade $connection_upgrade {
 
 server {
 	listen [::]:80 default_server ipv6only=off;
-	listen [::]:443 default_server ssl http2 ipv6only=off;
+	listen [::]:443 default_server ssl ipv6only=off;
+
+	http2 on;
 
 	server_name jethron.id.au www.jethron.id.au;
 
