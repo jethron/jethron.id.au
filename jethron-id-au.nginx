@@ -46,9 +46,6 @@ server {
 
 	ssl_certificate /home/jethron/letsencrypt/jethron.id.au/cert.pem;
 	ssl_certificate_key /home/jethron/letsencrypt/private/jethron.id.au/key.pem;
-	ssl_stapling on;
-	ssl_stapling_verify on;
-	resolver 108.61.10.10;
 
 	add_header_inherit merge;
 	add_header Expect-CT "max-age=86400,enforce" always;
